@@ -1,8 +1,8 @@
 # XTREE Python SDK
 
-Official Python client for the [XTREE](https://www.xtree.io) social media **real-time raw data** API. Accounts, content, media, comments — for monitoring and integration. **Not** a BI or analytics platform.
+Python client for the [XTREE](https://www.xtree.io) social media data API. Scripts and backends call REST through `XTreeClient`. Agent hosts that want tools should use [xtree-mcp](https://github.com/xtree-io/xtree-mcp) (WeChat tools today). **Not** a BI or analytics platform.
 
-Covers the public OpenAPI surface (WeChat, Douyin, Xiaohongshu, and more). See [OpenAPI](https://api.xtree.io/api/openapi.json) for the current operation list.
+Covers the public OpenAPI surface (WeChat, Douyin, Xiaohongshu, and the other live platforms). See [API reference](https://www.xtree.io/docs/apis) and [OpenAPI](https://api.xtree.io/api/openapi.json). Facebook, JD, and PDD client classes exist in the source tree and are not live catalog products.
 
 ## Install
 
