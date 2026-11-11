@@ -9,8 +9,18 @@ import pytest
 
 from xtree.registry import COVERED_ENDPOINTS, SLUG_BY_PATH
 
-ROOT = Path(__file__).resolve().parents[2]  # sdk/
+_HERE = Path(__file__).resolve()
+ROOT = next(
+    (
+        candidate
+        for candidate in (_HERE.parents[1], _HERE.parents[2])
+        if (candidate / "openapi" / "spec" / "openapi.json").is_file()
+    ),
+    _HERE.parents[2],
+)
 SPEC = ROOT / "openapi" / "spec" / "openapi.json"
+# Keep in sync with sdk/openapi/spec/openapi.json operation count.
+EXPECTED_OPS = 127
 
 
 def _openapi_operations(spec: dict) -> set[tuple[str, str]]:
@@ -27,8 +37,8 @@ def openapi_spec() -> dict:
     return json.loads(SPEC.read_text(encoding="utf-8"))
 
 
-def test_openapi_has_114_operations(openapi_spec: dict) -> None:
-    assert len(_openapi_operations(openapi_spec)) == 120
+def test_openapi_operation_count(openapi_spec: dict) -> None:
+    assert len(_openapi_operations(openapi_spec)) == EXPECTED_OPS
 
 
 def test_registry_covers_openapi(openapi_spec: dict) -> None:
@@ -39,4 +49,4 @@ def test_registry_covers_openapi(openapi_spec: dict) -> None:
 
 def test_slug_map_covers_all_registry_entries() -> None:
     assert set(SLUG_BY_PATH) == set(COVERED_ENDPOINTS)
-    assert len(SLUG_BY_PATH) == 120
+    assert len(SLUG_BY_PATH) == EXPECTED_OPS
