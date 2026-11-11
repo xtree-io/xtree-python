@@ -46,8 +46,12 @@ class XTreeRateLimitError(XTreeError):
     """429 RATE_LIMITED."""
 
 
-class XTreeUpstreamError(XTreeError):
-    """502 UPSTREAM_ERROR or 503 EDGE_UNAVAILABLE."""
+class XTreeServiceError(XTreeError):
+    """502 INTERNAL_ERROR（这次没有完成交付）或 503 EDGE_UNAVAILABLE。"""
+
+
+# 旧名保留，便于已有 except 继续接住 502。
+XTreeUpstreamError = XTreeServiceError
 
 
 _ERROR_MAP: dict[str, type[XTreeError]] = {
@@ -56,9 +60,8 @@ _ERROR_MAP: dict[str, type[XTreeError]] = {
     "VALIDATION_ERROR": XTreeValidationError,
     "INSUFFICIENT_BALANCE": XTreeInsufficientBalanceError,
     "RATE_LIMITED": XTreeRateLimitError,
-    "UPSTREAM_ERROR": XTreeUpstreamError,
-    "EDGE_UNAVAILABLE": XTreeUpstreamError,
-    "INTERNAL_ERROR": XTreeError,
+    "UPSTREAM_ERROR": XTreeServiceError,
+    "EDGE_UNAVAILABLE": XTreeServiceError,
     "NOT_FOUND": XTreeError,
 }
 
@@ -75,6 +78,8 @@ def error_from_envelope(
     request_id = meta.get("request_id")
     details = err.get("details")
     cls = _ERROR_MAP.get(code, XTreeError)
+    if code == "INTERNAL_ERROR" and status_code == 502:
+        cls = XTreeServiceError
     return cls(
         message,
         code=code,

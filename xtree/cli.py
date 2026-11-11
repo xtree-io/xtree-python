@@ -119,6 +119,18 @@ def _print_meta(meta: Any) -> None:
         "balance_cny": meta.balance_cny,
         "rate_limit_remaining": meta.rate_limit_remaining,
     }
+    for key in (
+        "observation_id",
+        "observed_at",
+        "basis",
+        "contract_rev",
+        "origin",
+        "cache_hit",
+        "cache_age_sec",
+    ):
+        value = getattr(meta, key, None)
+        if value is not None:
+            payload[key] = value
     print(json.dumps(payload, ensure_ascii=False), file=sys.stderr)
 
 

@@ -6,10 +6,8 @@ Covers the public OpenAPI surface (WeChat, Douyin, Xiaohongshu, and the other li
 
 ## Install
 
-PyPI package name for this SDK is not published yet (`xtree` on PyPI is an unrelated project). Install from GitHub:
-
 ```bash
-pip install "git+https://github.com/xtree-io/xtree-python.git"
+pip install xtree-sdk
 ```
 
 Requires Python 3.10+.

@@ -17,8 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: refuse colliding PyPI name
-        run: python -c "import pathlib,sys,tomllib; n=tomllib.load(pathlib.Path('pyproject.toml').open('rb'))['project']['name']; sys.exit('PyPI name xtree belongs to an unrelated project; rename before publishing' if n=='xtree' else 0)"
+      - name: require PyPI name xtree-sdk
+        run: python -c "import pathlib,sys,tomllib; n=tomllib.load(pathlib.Path('pyproject.toml').open('rb'))['project']['name']; sys.exit('pyproject project.name must be xtree-sdk' if n!='xtree-sdk' else 0)"
       - run: pip install build twine
       - run: python -m build
       - uses: pypa/gh-action-pypi-publish@release/v1
