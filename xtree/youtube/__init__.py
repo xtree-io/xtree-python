@@ -23,3 +23,12 @@ class YoutubeAPI:
 
     def search_channels(self, **body: Any) -> APIResponse[Any]:
         return self._http.request("POST", "/youtube/search/channels", json=body)
+
+    def videos_detail(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/youtube/videos/detail", json=body)
+
+    def videos_comments(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/youtube/videos/comments", json=body)
+
+    def channels_profile(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/youtube/channels/profile", json=body)

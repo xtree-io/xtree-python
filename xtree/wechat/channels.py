@@ -48,7 +48,7 @@ class WechatChannelsAPI:
     def feed_download_url(self, feed_id: str, **body: Any) -> APIResponse[Any]:
         return post(
             self._http,
-            "/wechat/channels/feeds/download-url",
+            "/wechat/channels/feeds/download",
             {"feed_id": feed_id, **body},
         )
 
@@ -93,7 +93,7 @@ class WechatChannelsAPI:
         )
 
     def resolve_url(self, *, url: str, **extra: Any) -> APIResponse[Any]:
-        return post(self._http, "/wechat/channels/feeds/resolve-url", {"url": url, **extra})
+        return post(self._http, "/wechat/channels/ids/resolve", {"url": url, **extra})
 
     def feed_title(self, feed_id: str, **body: Any) -> APIResponse[Any]:
         return post(self._http, "/wechat/channels/feeds/title", {"feed_id": feed_id, **body})
@@ -105,4 +105,4 @@ class WechatChannelsAPI:
         return post(self._http, "/wechat/channels/feeds/convert-id", body)
 
     def feed_short_url(self, feed_id: str, **body: Any) -> APIResponse[Any]:
-        return post(self._http, "/wechat/channels/feeds/short-url", {"feed_id": feed_id, **body})
+        return post(self._http, "/wechat/channels/feeds/short-link", {"feed_id": feed_id, **body})

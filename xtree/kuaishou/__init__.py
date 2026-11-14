@@ -18,6 +18,9 @@ class KuaishouAPI:
     def videos_comments(self, **body: Any) -> APIResponse[Any]:
         return self._http.request("POST", "/kuaishou/videos/comments", json=body)
 
+    def videos_sub_comments(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/kuaishou/videos/sub-comments", json=body)
+
     def users_profile(self, **body: Any) -> APIResponse[Any]:
         return self._http.request("POST", "/kuaishou/users/profile", json=body)
 

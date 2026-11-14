@@ -17,6 +17,8 @@ from xtree.bilibili import BilibiliAPI
 from xtree.tiktok import TiktokAPI
 from xtree.youtube import YoutubeAPI
 from xtree.facebook import FacebookAPI
+from xtree.instagram import InstagramAPI
+from xtree.twitter import TwitterAPI
 from xtree.taobao import TaobaoAPI
 from xtree.jd import JdAPI
 from xtree.pdd import PddAPI
@@ -58,6 +60,8 @@ class XTreeClient:
         self.tiktok = TiktokAPI(self._http)
         self.youtube = YoutubeAPI(self._http)
         self.facebook = FacebookAPI(self._http)
+        self.instagram = InstagramAPI(self._http)
+        self.twitter = TwitterAPI(self._http)
         self.taobao = TaobaoAPI(self._http)
         self.jd = JdAPI(self._http)
         self.pdd = PddAPI(self._http)

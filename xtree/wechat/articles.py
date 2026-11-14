@@ -28,7 +28,7 @@ class WechatArticlesAPI:
     def detail_with_video(self, article_id: str) -> APIResponse[Any]:
         return post(
             self._http,
-            "/wechat/articles/detail-with-video",
+            "/wechat/articles/video-link",
             {"article_id": article_id},
         )
 

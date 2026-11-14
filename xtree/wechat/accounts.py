@@ -41,7 +41,7 @@ class WechatAccountsAPI:
         body = page_body(page=page, gh_id=gh_id, **extra)
         if cursor is not None:
             body["cursor"] = cursor
-        return post(self._http, "/wechat/accounts/ghid/posts", body)
+        return post(self._http, "/wechat/accounts/posts/list", body)
 
     def ghid_posts(
         self,
@@ -55,7 +55,7 @@ class WechatAccountsAPI:
         return self.gh_id_posts(gh_id, page=page, cursor=cursor, **extra)
 
     def gh_id_channels(self, gh_id: str, **body: Any) -> APIResponse[Any]:
-        return post(self._http, "/wechat/accounts/ghid/channels", {"gh_id": gh_id, **body})
+        return post(self._http, "/wechat/accounts/channels", {"gh_id": gh_id, **body})
 
     def ghid_channels(self, gh_id: str, **body: Any) -> APIResponse[Any]:
         """Deprecated alias for gh_id_channels."""

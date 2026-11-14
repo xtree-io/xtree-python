@@ -33,5 +33,8 @@ class XhsAPI:
     def topics_list(self, **body: Any) -> APIResponse[Any]:
         return self._http.request("POST", "/xhs/topics/list", json=body)
 
+    def topics_notes(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/xhs/topics/notes", json=body)
+
     def ids_resolve(self, **body: Any) -> APIResponse[Any]:
         return self._http.request("POST", "/xhs/ids/resolve", json=body)

@@ -38,3 +38,15 @@ class DouyinAPI:
 
     def ids_resolve(self, **body: Any) -> APIResponse[Any]:
         return self._http.request("POST", "/douyin/ids/resolve", json=body)
+
+    def hot_search(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/douyin/hot/search", json=body)
+
+    def videos_metrics(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/douyin/videos/metrics", json=body)
+
+    def topics_detail(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/douyin/topics/detail", json=body)
+
+    def topics_videos(self, **body: Any) -> APIResponse[Any]:
+        return self._http.request("POST", "/douyin/topics/videos", json=body)
