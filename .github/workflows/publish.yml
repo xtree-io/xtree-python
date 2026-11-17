@@ -1,0 +1,24 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  id-token: write
+
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: require PyPI name xtree-sdk
+        run: python -c "import pathlib,sys,tomllib; n=tomllib.load(pathlib.Path('pyproject.toml').open('rb'))['project']['name']; sys.exit('pyproject project.name must be xtree-sdk' if n!='xtree-sdk' else 0)"
+      - run: pip install build twine
+      - run: python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1
